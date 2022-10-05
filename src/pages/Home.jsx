@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {recipeData.map((item, index) => {
           return (
             <Grid item key={index}>
