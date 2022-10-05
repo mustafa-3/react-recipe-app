@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+const navItems = ["Home", "About", "Login", "Register"];
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
@@ -71,9 +72,10 @@ export default function DrawerAppBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      {/* <Typography variant="h6" sx={{ my: 2 }}>
         MUI
-      </Typography>
+      </Typography> */}
+
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -89,6 +91,8 @@ export default function DrawerAppBar(props: Props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -110,6 +114,7 @@ export default function DrawerAppBar(props: Props) {
           >
             MUI
           </Typography>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -121,7 +126,11 @@ export default function DrawerAppBar(props: Props) {
           </Search>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
+              <Button
+                key={item}
+                sx={{ color: "#fff" }}
+                onClick={() => navigate(`/${item}`)}
+              >
                 {item}
               </Button>
             ))}
