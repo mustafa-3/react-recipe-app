@@ -129,7 +129,7 @@ export default function DrawerAppBar(props: Props) {
               <Button
                 key={item}
                 sx={{ color: "#fff" }}
-                onClick={() => navigate(`/${item}`)}
+                onClick={() => navigate(`/${item.toLowerCase()}`)}
               >
                 {item}
               </Button>
