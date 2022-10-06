@@ -17,6 +17,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -44,6 +45,7 @@ export default function Cards({ recipeData }) {
 
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => setToggle(!toggle);
+  const navigate = useNavigate();
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -67,6 +69,7 @@ export default function Cards({ recipeData }) {
         image={image}
         alt="Paella dish"
         sx={{ cursor: "pointer" }}
+        onClick={() => navigate(`/detail`, { state: recipeData })}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -81,7 +84,12 @@ export default function Cards({ recipeData }) {
         </IconButton>
 
         <Stack spacing={2} direction="row" sx={{ marginLeft: "auto" }}>
-          <Button variant="outlined">VİEW MORE</Button>
+          <Button
+            variant="outlined"
+            onClick={() => navigate(`/detail`, { state: recipeData })}
+          >
+            VİEW MORE
+          </Button>
         </Stack>
 
         <ExpandMore

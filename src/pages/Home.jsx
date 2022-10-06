@@ -56,8 +56,12 @@ const Home = () => {
       )}
 
       <Container>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={4}>
+        <Box>
+          <Grid
+            container
+            spacing={4}
+            sx={{ justifyContent: "center", alignItems: "center" }}
+          >
             {recipeData.map((item, index) => {
               return (
                 <Grid item key={index}>
