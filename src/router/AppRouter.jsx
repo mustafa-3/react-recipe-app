@@ -11,7 +11,6 @@ import PrivateRouter from "./PrivateRouter";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
