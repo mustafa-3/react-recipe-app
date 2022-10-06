@@ -15,6 +15,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
+import { useState } from "react";
+import Stack from "@mui/material/Stack";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -40,6 +42,9 @@ export default function Cards({ recipeData }) {
 
   const { label, image, healthLabels } = recipeData.recipe;
 
+  const [toggle, setToggle] = useState(false);
+  const handleToggle = () => setToggle(!toggle);
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -56,7 +61,13 @@ export default function Cards({ recipeData }) {
         title={label}
         subheader="September 14, 2016"
       />
-      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+      <CardMedia
+        component="img"
+        height="194"
+        image={image}
+        alt="Paella dish"
+        sx={{ cursor: "pointer" }}
+      />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           This impressive paella is a perfect party dish and a fun meal to cook
@@ -65,12 +76,14 @@ export default function Cards({ recipeData }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="add to favorites" onClick={handleToggle}>
+          <FavoriteIcon sx={{ color: toggle ? "red" : "grey" }} />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+
+        <Stack spacing={2} direction="row" sx={{ marginLeft: "auto" }}>
+          <Button variant="outlined">VİEW MORE</Button>
+        </Stack>
+
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -82,7 +95,9 @@ export default function Cards({ recipeData }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph variant="h5">Health:</Typography>
+          <Typography paragraph variant="h5">
+            Health:
+          </Typography>
           <Typography paragraph component={"span"} variant={"body2"}>
             {healthLabels.map((line, index) => (
               <div key={index}>
