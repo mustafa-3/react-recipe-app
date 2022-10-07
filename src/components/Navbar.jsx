@@ -146,7 +146,7 @@ export default function DrawerAppBar(props: Props) {
                   <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                  placeholder="Search…"
+                  placeholder="Search a meal..."
                   inputProps={{ "aria-label": "search" }}
                   onChange={(e) => setQuery(e.target.value)}
                 />
@@ -154,32 +154,30 @@ export default function DrawerAppBar(props: Props) {
             </Box>
           </form>
 
-          <form onSubmit={handleSubmit}>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                {/* <InputLabel
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              {/* <InputLabel
                     id="demo-simple-select-label"
                     // sx={{ color: "white" }}
                   >
                     Meal Type
                   </InputLabel> */}
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={selectedMeal}
-                  // label="Meal Type"
-                  onChange={(e) => setSelectedMeal(e.target.value)}
-                  sx={{ color: "white" }}
-                >
-                  <MenuItem value={"lunch"}>Lunch</MenuItem>
-                  <MenuItem value={"breakfast"}>Breakfast</MenuItem>
-                  <MenuItem value={"brunch"}>Brunch</MenuItem>
-                  <MenuItem value={"snack"}>Snack</MenuItem>
-                  <MenuItem value={"teatime"}>Teatime</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </form>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedMeal}
+                // label="Meal Type"
+                onChange={(e) => setSelectedMeal(e.target.value)}
+                sx={{ color: "white" }}
+              >
+                <MenuItem value={"lunch"}>Lunch</MenuItem>
+                <MenuItem value={"breakfast"}>Breakfast</MenuItem>
+                <MenuItem value={"brunch"}>Brunch</MenuItem>
+                <MenuItem value={"snack"}>Snack</MenuItem>
+                <MenuItem value={"teatime"}>Teatime</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (

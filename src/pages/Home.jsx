@@ -11,6 +11,7 @@ import { textAlign } from "@mui/system";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
+import { Typography } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -25,6 +26,7 @@ const Home = () => {
   const [query, setQuery] = useState("chicken");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("lunch");
+  const [error, setError] = useState(false);
   const APP_KEY = "3cde9e853ac30b4dfd6e6971fa023393";
   const APP_ID = "0bfed9b1";
   const FEATURED_API = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
@@ -32,7 +34,13 @@ const Home = () => {
   const getData = async (API) => {
     setIsLoading(true);
     fetch(API)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          setError(true);
+          throw new Error("Something went wrong");
+        }
+        return res.json();
+      })
       .then((data) => setRecipeData(data.hits))
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
@@ -61,7 +69,14 @@ const Home = () => {
           </Box>
         </Container>
       )}
-
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {recipeData.length === 0 && (
+          <Typography variant="h2">The food can not be found </Typography>
+        )}
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {error && <Typography variant="h2">Something went wrong </Typography>}
+      </Box>
       <Container>
         <Box>
           <Grid
