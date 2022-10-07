@@ -18,6 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -117,10 +118,15 @@ export default function DrawerAppBar(
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+              cursor: "pointer",
+            }}
           >
             RECİPE APP
           </Typography>

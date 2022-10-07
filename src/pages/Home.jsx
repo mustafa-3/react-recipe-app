@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { textAlign } from "@mui/system";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,10 +41,33 @@ const Home = () => {
   }, []);
 
   console.log(recipeData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getData(FEATURED_API);
+  };
 
   return (
     <>
       <Navbar />
+
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        textAlign={"center"}
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          id="standard-basic"
+          label="Standard"
+          variant="standard"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </Box>
+
       {isLoading && (
         <Container sx={{ display: "flex", justifyContent: "center" }}>
           <Box sx={{ height: "100vh" }}>

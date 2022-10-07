@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Grid } from "@mui/material";
 import Navbar from "../components/Navbar";
 import { height } from "@mui/system";
@@ -33,6 +33,9 @@ const Detail = () => {
     totalWeight,
   } = state.recipe;
   console.log(state);
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar />
@@ -180,7 +183,9 @@ const Detail = () => {
               marginTop: "2rem",
             }}
           >
-            <Button variant="contained">Go Back</Button>
+            <Button variant="contained" onClick={() => navigate(-1)}>
+              Go Back
+            </Button>
           </Stack>
         </Grid>
       </Grid>
