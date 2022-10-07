@@ -22,14 +22,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Home = () => {
   const [recipeData, setRecipeData] = useState([]);
-  const [query, setQuery] = useState("chicken");
+  const [query, setQuery] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState("lunch");
   const APP_KEY = "3cde9e853ac30b4dfd6e6971fa023393";
   const APP_ID = "0bfed9b1";
   const FEATURED_API = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
 
-  const getData = (API) => {
+  const getData = async (API) => {
     setIsLoading(true);
     fetch(API)
       .then((res) => res.json())
@@ -43,32 +43,15 @@ const Home = () => {
   }, []);
 
   console.log(recipeData);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    getData(FEATURED_API);
-  };
 
   return (
     <>
-      <Navbar />
-
-      <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-        textAlign={"center"}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="standard-basic"
-          label="Standard"
-          variant="standard"
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      </Box>
+      <Navbar
+        setQuery={setQuery}
+        selectedMeal={selectedMeal}
+        getData={getData}
+        query={query}
+      />
 
       {isLoading && (
         <Container sx={{ display: "flex", justifyContent: "center" }}>
