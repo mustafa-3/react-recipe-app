@@ -30,10 +30,12 @@ const Home = () => {
   const FEATURED_API = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
 
   const getData = (API) => {
+    setIsLoading(true);
     fetch(API)
       .then((res) => res.json())
       .then((data) => setRecipeData(data.hits))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
