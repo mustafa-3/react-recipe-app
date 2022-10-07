@@ -67,7 +67,7 @@ const navItems = ["Home", "About", "Login", "Register"];
 
 export default function DrawerAppBar(props: Props) {
   const { window, selectedMeal, getData, setQuery, query } = props;
-  console.log(selectedMeal);
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -179,3 +179,4 @@ export default function DrawerAppBar(props: Props) {
     </Box>
   );
 }
+

@@ -22,12 +22,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Home = () => {
   const [recipeData, setRecipeData] = useState([]);
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState("chicken");
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedMeal, setSelectedMeal] = useState("lunch");
+  const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const APP_KEY = "3cde9e853ac30b4dfd6e6971fa023393";
   const APP_ID = "0bfed9b1";
-  const FEATURED_API = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
+  const FEATURED_API = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
 
   const getData = async (API) => {
     setIsLoading(true);
