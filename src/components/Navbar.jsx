@@ -18,7 +18,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,7 +69,8 @@ const drawerWidth = 240;
 const navItems = ["Home", "About", "Login", "Register"];
 
 export default function DrawerAppBar(props: Props) {
-  const { window, selectedMeal, getData, setQuery, query } = props;
+  const { window, setSelectedMeal, getData, setQuery, query, selectedMeal } =
+    props;
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -102,6 +106,8 @@ export default function DrawerAppBar(props: Props) {
     getData(SEARCH_API);
   };
 
+  console.log(selectedMeal);
+  console.log(query);
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar component="nav">
@@ -128,16 +134,51 @@ export default function DrawerAppBar(props: Props) {
             RECİPE APP
           </Typography>
           <form onSubmit={handleSubmit}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </Search>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+              </Search>
+            </Box>
+          </form>
+
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                {/* <InputLabel
+                    id="demo-simple-select-label"
+                    // sx={{ color: "white" }}
+                  >
+                    Meal Type
+                  </InputLabel> */}
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedMeal}
+                  // label="Meal Type"
+                  onChange={(e) => setSelectedMeal(e.target.value)}
+                  sx={{ color: "white" }}
+                >
+                  <MenuItem value={"lunch"}>Lunch</MenuItem>
+                  <MenuItem value={"breakfast"}>Breakfast</MenuItem>
+                  <MenuItem value={"brunch"}>Brunch</MenuItem>
+                  <MenuItem value={"snack"}>Snack</MenuItem>
+                  <MenuItem value={"teatime"}>Teatime</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
           </form>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -179,4 +220,3 @@ export default function DrawerAppBar(props: Props) {
     </Box>
   );
 }
-
