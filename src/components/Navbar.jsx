@@ -16,6 +16,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import TextField from "@mui/material/TextField";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,7 +64,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Login", "Register"];
 
-export default function DrawerAppBar(props: Props) {
+export default function DrawerAppBar(
+  props: Props
+  // { getData, selectedMeal, setQuery, query }
+) {
+  // const APP_KEY = "3cde9e853ac30b4dfd6e6971fa023393";
+  // const APP_ID = "0bfed9b1";
+  // const SEARCH_API = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   getData(SEARCH_API);
+  // };
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -72,10 +86,6 @@ export default function DrawerAppBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      {/* <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography> */}
-
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -112,18 +122,21 @@ export default function DrawerAppBar(props: Props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            RECİPE APP
           </Typography>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <form>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                // value={query}
+                // onChange={(e) => setQuery(e.target.value)}
+              />
+            </Search>
+          </form>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button

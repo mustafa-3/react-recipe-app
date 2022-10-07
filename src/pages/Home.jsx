@@ -27,19 +27,17 @@ const Home = () => {
   const [selectedMeal, setSelectedMeal] = useState("lunch");
   const APP_KEY = "3cde9e853ac30b4dfd6e6971fa023393";
   const APP_ID = "0bfed9b1";
-  const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
+  const FEATURED_API = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${selectedMeal}`;
 
-  const getData = () => {
-    setIsLoading(true);
-    fetch(url)
+  const getData = (API) => {
+    fetch(API)
       .then((res) => res.json())
       .then((data) => setRecipeData(data.hits))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getData();
+    getData(FEATURED_API);
   }, []);
 
   console.log(recipeData);
@@ -62,7 +60,7 @@ const Home = () => {
             spacing={4}
             sx={{ justifyContent: "center", alignItems: "center" }}
           >
-            {recipeData.map((item, index) => {
+            {recipeData?.map((item, index) => {
               return (
                 <Grid item key={index}>
                   <Item>
