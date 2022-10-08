@@ -90,7 +90,6 @@ const Home = () => {
                   <Item>
                     <Cards recipeData={item} />
                   </Item>
-                  ;
                 </Grid>
               );
             })}
