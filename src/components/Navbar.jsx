@@ -70,7 +70,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Login", "Register"];
-const userItems = ["Home", "About", "Logout", "displayName"];
 
 export default function DrawerAppBar(props: Props) {
   const { window, setSelectedMeal, getData, setQuery, query, selectedMeal } =
@@ -154,6 +153,7 @@ export default function DrawerAppBar(props: Props) {
                   placeholder="Search a meal..."
                   inputProps={{ "aria-label": "search" }}
                   onChange={(e) => setQuery(e.target.value)}
+                  // sx={{ flexGrow: 1 }}
                 />
               </Search>
             </Box>
@@ -183,7 +183,7 @@ export default function DrawerAppBar(props: Props) {
               </Select>
             </FormControl>
           </Box>
-          {currentUser && (
+          {!currentUser && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => (
                 <Button
@@ -197,10 +197,16 @@ export default function DrawerAppBar(props: Props) {
             </Box>
           )}
 
-          {!currentUser && (
+          {currentUser && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Typography sx={{ color: "black" }} variant="Button">
-                displayName
+              <Typography
+                sx={{
+                  marginLeft: "1rem",
+                  display: { sm: "none", md: "inline-block" },
+                }}
+                variant="Button"
+              >
+                {currentUser.displayName}
               </Typography>
               <Button sx={{ color: "#fff" }} onClick={() => navigate("/")}>
                 HOME

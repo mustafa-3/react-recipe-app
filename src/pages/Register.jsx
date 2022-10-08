@@ -41,11 +41,12 @@ export default function SignInSide() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signUp(email, password, navigate);
+    const displayName = `${firstName} ${lastName}`;
+    signUp(email, password, navigate, displayName);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -104,7 +105,7 @@ export default function SignInSide() {
                 name="firstName"
                 autoComplete="firstName"
                 autoFocus
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value.toUpperCase())}
               />
               <TextField
                 margin="normal"
@@ -115,7 +116,7 @@ export default function SignInSide() {
                 name="lastName"
                 autoComplete="lastName"
                 autoFocus
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value.toUpperCase())}
               />
               <TextField
                 margin="normal"
