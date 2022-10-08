@@ -24,6 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Detail = () => {
   const { state } = useLocation();
+
   const {
     image,
     ingredientLines,

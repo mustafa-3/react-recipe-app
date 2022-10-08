@@ -65,12 +65,14 @@ export const logOut = () => {
   signOut(auth);
 };
 
-export const signInWithGoogle = () => {
+export const signInWithGoogle = (navigate) => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result);
+      navigate("/");
     })
+
     .catch((error) => {
       console.log(error);
     });

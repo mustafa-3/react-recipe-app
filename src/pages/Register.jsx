@@ -151,7 +151,7 @@ export default function SignInSide() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -159,7 +159,11 @@ export default function SignInSide() {
                     Take me Home
                   </Link>
                 </Grid>
-                <Grid item></Grid>
+                <Grid item xs>
+                  <Link href="/login" variant="body2">
+                    Do you have an account? Log in
+                  </Link>
+                </Grid>
               </Grid>
               {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>

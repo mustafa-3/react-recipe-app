@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { login } from "../auth/Firebase";
+import { login, signInWithGoogle } from "../auth/Firebase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -123,9 +123,18 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 1 }}
               >
                 Login
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 2 }}
+                onClick={() => signInWithGoogle(navigate)}
+              >
+                Sign in With Google
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -133,7 +142,11 @@ export default function SignInSide() {
                     Take me Home
                   </Link>
                 </Grid>
-                <Grid item></Grid>
+                <Grid item xs>
+                  <Link href="/register" variant="body2">
+                    Don't have an account yet? Sign Up
+                  </Link>
+                </Grid>
               </Grid>
               {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>

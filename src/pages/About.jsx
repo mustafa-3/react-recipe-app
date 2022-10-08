@@ -17,7 +17,6 @@ export default function About() {
           display: "flex",
           justifyContent: "center",
           height: "calc(100vh - 130px)",
-          
         }}
       >
         <Card sx={{ maxWidth: 545 }}>

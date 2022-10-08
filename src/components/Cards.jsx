@@ -34,7 +34,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function Cards({ recipeData }) {
+export default function Cards({ recipeData, getData }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {

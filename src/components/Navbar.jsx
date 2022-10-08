@@ -87,7 +87,10 @@ export default function DrawerAppBar(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              onClick={() => navigate(`/${item}`)}
+            >
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -153,7 +156,6 @@ export default function DrawerAppBar(props: Props) {
                   placeholder="Search a meal..."
                   inputProps={{ "aria-label": "search" }}
                   onChange={(e) => setQuery(e.target.value)}
-                  // sx={{ flexGrow: 1 }}
                 />
               </Search>
             </Box>
@@ -173,7 +175,7 @@ export default function DrawerAppBar(props: Props) {
                 value={selectedMeal}
                 // label="Meal Type"
                 onChange={(e) => setSelectedMeal(e.target.value)}
-                sx={{ color: "white" }}
+                sx={{ color: "white", marginLeft: ".5rem" }}
               >
                 <MenuItem value={"lunch"}>Lunch</MenuItem>
                 <MenuItem value={"breakfast"}>Breakfast</MenuItem>
