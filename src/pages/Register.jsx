@@ -12,6 +12,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
+import { signUp } from "../auth/Firebase";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
   return (
@@ -34,8 +37,15 @@ function Login(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate()
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    signUp(email, password, navigate);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -94,6 +104,7 @@ export default function SignInSide() {
                 name="firstName"
                 autoComplete="firstName"
                 autoFocus
+                onChange={(e) => setFirstName(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -104,6 +115,7 @@ export default function SignInSide() {
                 name="lastName"
                 autoComplete="lastName"
                 autoFocus
+                onChange={(e) => setLastName(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -114,6 +126,7 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -124,6 +137,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <FormControlLabel

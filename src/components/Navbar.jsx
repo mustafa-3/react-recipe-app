@@ -22,6 +22,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { AuthContext } from "../context/AuthContextProvider";
+import { useContext } from "react";
+import { logOut } from "../auth/Firebase";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,6 +70,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Login", "Register"];
+const userItems = ["Home", "About", "Logout", "displayName"];
 
 export default function DrawerAppBar(props: Props) {
   const { window, setSelectedMeal, getData, setQuery, query, selectedMeal } =
@@ -96,6 +100,7 @@ export default function DrawerAppBar(props: Props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const APP_KEY = "3cde9e853ac30b4dfd6e6971fa023393";
   const APP_ID = "0bfed9b1";
@@ -178,18 +183,36 @@ export default function DrawerAppBar(props: Props) {
               </Select>
             </FormControl>
           </Box>
+          {currentUser && (
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              {navItems.map((item) => (
+                <Button
+                  key={item}
+                  sx={{ color: "#fff" }}
+                  onClick={() => navigate(`/${item.toLowerCase()}`)}
+                >
+                  {item}
+                </Button>
+              ))}
+            </Box>
+          )}
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button
-                key={item}
-                sx={{ color: "#fff" }}
-                onClick={() => navigate(`/${item.toLowerCase()}`)}
-              >
-                {item}
+          {!currentUser && (
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <Typography sx={{ color: "black" }} variant="Button">
+                displayName
+              </Typography>
+              <Button sx={{ color: "#fff" }} onClick={() => navigate("/")}>
+                HOME
               </Button>
-            ))}
-          </Box>
+              <Button sx={{ color: "#fff" }} onClick={() => navigate("/about")}>
+                ABOUT
+              </Button>
+              <Button sx={{ color: "#fff" }} onClick={() => logOut()}>
+                LOGOUT
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <Box component="nav">

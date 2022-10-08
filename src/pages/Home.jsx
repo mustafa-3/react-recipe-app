@@ -71,11 +71,11 @@ const Home = () => {
       )}
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         {recipeData.length === 0 && (
-          <Typography variant="h2">The food can not be found </Typography>
+          <Typography variant="h2">The food can not be found</Typography>
         )}
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        {error && <Typography variant="h2">Something went wrong </Typography>}
+        {error && <Typography variant="h2">Something went wrong</Typography>}
       </Box>
       <Container>
         <Box>
